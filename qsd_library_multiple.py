@@ -1,6 +1,13 @@
 import numpy as np
-import tensorflow as tf
 import scipy as sp
+
+import gym
+from itertools import chain
+
+import cmath
+import copy
+import random 
+
 
 def cum_kron(rp):
     r = np.array([[1]])
@@ -53,14 +60,7 @@ def generate_initial_state(d, m, depolarized = True):
     q = np.random.permutation(np.array(p))
     return rho, q
 
-import numpy as np
-import gym
-import scipy as sp
-from itertools import chain
 
-import cmath
-import copy
-import random 
 
 def POVMsimple(x):
     return np.array([[[x**2, x*np.sqrt(1-x**2)],[x*np.sqrt(1-x**2), 1-x**2]],
@@ -82,10 +82,6 @@ def act_space_map(action_label, quant):
     j = int(action_label//quant)
     actlabel= int(action_label)-quant*j
     return np.array([actlabel, j])
-
-
-import gym
-import copy
 
 
 class QSDEnv(gym.Env):
