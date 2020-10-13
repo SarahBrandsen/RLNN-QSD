@@ -4,13 +4,16 @@ We develop a reinforcement learning with neural networks (RLNN) approach for m-a
 
 #### How to Use
 
-```python
-from qsd_library_last import *
+```from qsd_library_last import *
 from sdp import *
+import ray
+from ray import tune
+import ray.rllib.agents.ppo.ppo as ppo
+from ray.rllib.agents.ppo import PPOTrainer as Trainer
 
 
 #number of training iterations for the neural network
-training_trials = 1000
+training_trials = 200
 #number of evaluation episodes after training
 evaluation_trials = 5000
 #number of training iterations between neural network checkpoint
