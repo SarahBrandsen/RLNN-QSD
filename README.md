@@ -40,7 +40,7 @@ config["num_workers"] = 5
 config["lr"] = 0.00005
 config["num_sgd_iter"] = 15
 config["env_config"] = defaultconfig
-trainer = Trainer(config=config, env=qsdm.QSDEnv)
+trainer = Trainer(config=config, env=QSDEnv)
 
 #training
 for i in range(training_trials):
@@ -53,7 +53,7 @@ for i in range(training_trials):
 
 #evaluation
 for i in range(evaluation_trials):
-    env=qsdm.QSDEnv(defaultconfig)
+    env=QSDEnv(defaultconfig)
     obs = env.reset()
     done = False
     while not done:
