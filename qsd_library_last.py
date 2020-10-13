@@ -1,10 +1,13 @@
 import cvxopt
 from cvxopt import matrix, solvers
+import gym
+
 import numpy as np
 import scipy as sp
 from itertools import chain
 import cmath
 import copy
+import random 
 
 def Amatrix(n):
     A = np.zeros([2**n*2**n, 2**(n-1)*(2**(n)-1)])
@@ -41,13 +44,6 @@ def SDP(rho, q, n):
     value = np.array(v)@np.eye(2**n).flatten()
     return value
 
-
-
-
-
-import numpy as np
-import tensorflow as tf
-import scipy as sp
 
 def cum_kron(rp):
     r = np.array([[1]])
@@ -103,14 +99,6 @@ def generate_initial_state(d, m, rng = 1, depolarized = True):
     q = np.random.permutation(np.array(p))
     return rho, q
 
-import numpy as np
-import gym
-import scipy as sp
-from itertools import chain
-
-import cmath
-import copy
-import random 
 
 def POVMsimple(x):
     return np.array([[[np.cos(np.pi*x/2)**2, np.cos(np.pi*x/2)*np.sin(np.pi*x/2)],
@@ -119,25 +107,10 @@ def POVMsimple(x):
                       [-np.cos(np.pi*x/2)*np.sin(np.pi*x/2), np.cos(np.pi*x/2)**2]]])
 
 
-def POVMU(x):
-    return np.array([[np.cos(np.pi*x), -np.sin(np.pi*x)],[np.sin(np.pi*x), np.cos(np.pi*x)]])
-
-def POVMtU(x):
-    return np.array([[np.cos(np.pi*x), np.sin(np.pi*x)],[-np.sin(np.pi*x), np.cos(np.pi*x)]])
-
-def POVMtsimple(x):
-    U = np.array([[np.cos(np.pi*2/(3)), -np.sin(np.pi*2/(3))],[np.sin(np.pi*2/(3)), np.cos(np.pi*2/(3))]])
-    Ut = np.array([[np.cos(np.pi*2/(3)), np.sin(np.pi*2/(3))],[-np.sin(np.pi*2/(3)), np.cos(np.pi*2/(3))]])
-    return 2/3*np.array([POVMU(x)@U@np.array([[1,0],[0,0]])@Ut@POVMtU(x), POVMU(x)@U@U@np.array([[1,0],[0,0]])@Ut@Ut@POVMtU(x),  POVMU(x)@np.array([[1,0],[0,0]])@POVMtU(x)])
-
 def act_space_map(action_label, quant):
     j = int(action_label//quant)
     actlabel= int(action_label)-quant*j
     return np.array([actlabel, j])
-
-
-import gym
-import copy
 
 
 class QSDEnv(gym.Env):
