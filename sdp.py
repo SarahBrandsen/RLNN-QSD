@@ -34,6 +34,7 @@ def SDP(rho, q, n):
     for _ in range(len(rho)-1):
         G += [matrix((-1*np.eye(2**n*2**n)).tolist())]
         h += [ matrix((-q[_]*kronecker_prod(rho[_])).tolist()) ]
+    solvers.options['show_progress'] = False
     sol = solvers.sdp(c, Gs=G, hs=h, A=A, b=b)
     v = []
     for _ in range(2**n*2**n):
