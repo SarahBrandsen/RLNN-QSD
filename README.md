@@ -5,7 +5,7 @@ We develop a reinforcement learning with neural networks (RLNN) approach for m-a
 #### How to Use
 
 ```python
-from qsd_library_multiple import *
+from qsd_library_last import *
 from sdp import *
 
 
